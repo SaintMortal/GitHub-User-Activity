@@ -4,6 +4,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.google.gson.Gson;
 
@@ -11,8 +12,15 @@ import com.google.gson.Gson;
 
 public class Main {
     public static void main(String[] args) {
-        String username = "SaintMortal"; // Replace with desired GitHub username
+        
+        // Input username
+        String username = ""; 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter GitHub username: ");
+        username = scanner.nextLine();
+        scanner.close();
 
+        // Get Api
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
@@ -26,6 +34,7 @@ public class Main {
             Gson gson = new Gson();
             Event[] events = gson.fromJson(response.body(), Event[].class);
 
+            // Doublsfinder
             ArrayList<String> eventList = new ArrayList<String>();
             eventList.add(events[0].repo.id);
             int counter = 0;
@@ -33,7 +42,6 @@ public class Main {
                 Event e = events[i];
                 for (int j = 0 + counter; j < eventList.size(); j++) {
                     if (eventList.get(j).equals(e.repo.id)) {
-                        System.out.println("Этот элемент уже есть");
                         break;
                     }else {
                         counter++;
@@ -44,6 +52,7 @@ public class Main {
             }
             //System.out.println(eventList);
 
+            // Calling funktion with showing
             for (int i = 0; i < eventList.size(); i++) {
                 String repoName = "";
                 for (Event e : events) {
@@ -60,12 +69,12 @@ public class Main {
 
     }
 
+    // Show funktion 
     static void show(Event[] events, ArrayList<String> eventList, int i, String repoName) {
                 int eventCount = 0;
                 for (Event e : events) {
                     if (e.type1.equals("PushEvent") && e.repo.id.equals(eventList.get(i))) {
                         eventCount++;
-                        // System.out.println(e.type1 + " - " + e.repo.name + " - " + e.created_at + " " + e.repo.id + " " + e.actor.login);
                     }
                 }
                 System.out.println("Pushed " + eventCount + " times to the " + repoName + " repository.");
