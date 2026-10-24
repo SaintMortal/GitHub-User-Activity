@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Finished-success?style=for-the-badge&logo=none" alt="Status">
-  <img src="https://img.shields.io/badge/Language-Python-blue?style=for-the-badge&logo=python" alt="Language">
+  <img src="https://img.shields.io/badge/Language-Java-blue?style=for-the-badge&logo=python" alt="Language">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge&logo=none" alt="License">
 </p>
 
